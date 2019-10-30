@@ -57,7 +57,12 @@ function civicrm_api3_civigmailaddon_Createactivity($params) {
     CRM_Core_Error::debug_log_message($error);
   }
 
-  // Spec: civicrm_api3_create_success($values = 1, $params = array(), $entity = NULL, $action = NULL)
+  // create attachment(s)
+  $params['created_id']   = $source_contact_id;
+  $params['activity_id']  = $resultActivity['id'];
+  $result = civicrm_api3('Civigmailaddon', 'createattachment', $params);
+  $resultActivity['attachment'] = $result;
+
   return civicrm_api3_create_success($resultActivity, $params, 'Civigmailaddon', 'Createactivity');
 }
 
@@ -93,7 +98,6 @@ function _civigmailaddon_contact_create($gmailContacts) {
       else {
         // create contact
         $result = civicrm_api3('Contact', 'create', ['contact_type' => 'individual', 'email' => $email]);
-        CRM_Core_Error::debug_var("result", $result);
         $contactIDs[$result['id']] = $email;
       }
     }

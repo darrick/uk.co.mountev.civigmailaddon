@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<menu>
+  <item>
+    <path>civicrm/settings/gmail-addon-log</path>
+    <page_callback>CRM_Civigmailaddon_Page_Logging</page_callback>
+    <title>Gmail Addon Logs</title>
+    <access_arguments>administer CiviCRM</access_arguments>
+  </item>
+</menu>

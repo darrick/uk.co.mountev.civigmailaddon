@@ -39,6 +39,7 @@ function civicrm_api3_civigmailaddon_Getactivityresources($params) {
   $activityStatus = CRM_Core_PseudoConstant::activityStatus('name');
   $result['activity_status'] = $activityStatus;
 
-  return civicrm_api3_create_success($result, $params, 'Civigmailaddon', 'Getactivityresources');
+  // return civicrm_api3_create_success($result, $params, 'Civigmailaddon', 'Getactivityresources');
+  return $result;
 }
 

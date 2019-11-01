@@ -37,6 +37,10 @@ function civicrm_api3_civigmailaddon_Getcontact($params) {
     reset($result['values']);
     $firstContactID = key($result['values']);
 
+    // no contact found - it's a new contact
+    if (!$firstContactID) {
+      return $result;
+    }
     // build contact view url
     $contactViewURL = CRM_Utils_System::url('civicrm/contact/view', "reset=1&cid={$firstContactID}", TRUE, NULL, FALSE);
     $result['values'][$firstContactID]['contact_view_url'] = $contactViewURL;

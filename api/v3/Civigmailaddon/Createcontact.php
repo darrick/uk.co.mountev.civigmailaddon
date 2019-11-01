@@ -31,6 +31,11 @@ function civicrm_api3_civigmailaddon_Createcontact($params) {
     $contactParams['last_name']     = $params['last_name'];
     $contactParams['email']         = $params['email'];
 
+    // update contact if contactID is found
+    if (CRM_Utils_Array::value("id", $params)) {
+      $contactParams['id'] = $params['id'];
+    }
+
     $result = civicrm_api3('Contact', 'create', $contactParams, 'Civigmailaddon', 'Createcontact', $params);
     // build contact view url
     $contactViewURL = CRM_Utils_System::url('civicrm/contact/view', "reset=1&cid={$result['id']}", TRUE, NULL, FALSE);

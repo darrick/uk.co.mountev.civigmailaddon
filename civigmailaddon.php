@@ -157,14 +157,13 @@ function civigmailaddon_civicrm_preProcess($formName, &$form) {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_navigationMenu
  *
+ */
 function civigmailaddon_civicrm_navigationMenu(&$menu) {
-  _civigmailaddon_civix_insert_navigation_menu($menu, 'Mailings', array(
-    'label' => E::ts('New subliminal message'),
-    'name' => 'mailing_subliminal_message',
-    'url' => 'civicrm/mailing/subliminal',
-    'permission' => 'access CiviMail',
-    'operator' => 'OR',
-    'separator' => 0,
+  _civigmailaddon_civix_insert_navigation_menu($menu, 'Administer/System Settings', array(
+    'label' => E::ts('Gmail Addon Log'),
+    'name' => 'gmail_addon_log',
+    'url' => 'civicrm/settings/gmail-addon-log',
+    'permission' => 'administer CiviCRM',
   ));
   _civigmailaddon_civix_navigationMenu($menu);
-} // */
+}

@@ -10,7 +10,7 @@ use CRM_Civigmailaddon_ExtensionUtil as E;
  * @see https://docs.civicrm.org/dev/en/latest/framework/api-architecture/
  */
 function _civicrm_api3_civigmailaddon_Createcontact_spec(&$spec) {
-  $spec['magicword']['api.required'] = 1;
+  $spec['email']['api.required'] = 1;
 }
 
 /**
@@ -23,20 +23,23 @@ function _civicrm_api3_civigmailaddon_Createcontact_spec(&$spec) {
  * @throws API_Exception
  */
 function civicrm_api3_civigmailaddon_Createcontact($params) {
-  if (array_key_exists('magicword', $params) && $params['magicword'] == 'sesame') {
-    $returnValues = array(
-      // OK, return several data rows
-      12 => array('id' => 12, 'name' => 'Twelve'),
-      34 => array('id' => 34, 'name' => 'Thirty four'),
-      56 => array('id' => 56, 'name' => 'Fifty six'),
-    );
-    // ALTERNATIVE: $returnValues = array(); // OK, success
-    // ALTERNATIVE: $returnValues = array("Some value"); // OK, return a single value
+  $result = $contactParams = [];
+  // create contact
+  try {
+    $contactParams['contact_type']  = "Individual";
+    $contactParams['first_name']    = $params['first_name'];
+    $contactParams['last_name']     = $params['last_name'];
+    $contactParams['email']         = $params['email'];
 
-    // Spec: civicrm_api3_create_success($values = 1, $params = array(), $entity = NULL, $action = NULL)
-    return civicrm_api3_create_success($returnValues, $params, 'NewEntity', 'NewAction');
+    $result = civicrm_api3('Contact', 'create', $contactParams, 'Civigmailaddon', 'Createcontact', $params);
+    // build contact view url
+    $contactViewURL = CRM_Utils_System::url('civicrm/contact/view', "reset=1&cid={$result['id']}", TRUE, NULL, FALSE);
+    $result['contact_view_url'] = $contactViewURL;
   }
-  else {
-    throw new API_Exception(/*errorMessage*/ 'Everyone knows that the magicword is "sesame"', /*errorCode*/ 1234);
+  catch (CiviCRM_API3_Exception $e) {
+    $error = $e->getMessage();
+    CRM_Core_Error::debug_log_message($error);
   }
+
+  return civicrm_api3_create_success($result, $params, 'Civigmailaddon', 'Createcontact');
 }

@@ -26,10 +26,14 @@ function civicrm_api3_civigmailaddon_Createcontact($params) {
   $result = $contactParams = [];
   // create contact
   try {
-    $contactParams['contact_type']  = "Individual";
-    $contactParams['first_name']    = $params['first_name'];
-    $contactParams['last_name']     = $params['last_name'];
-    $contactParams['email']         = $params['email'];
+    $contactParams['contact_type']        = "Individual";
+    $contactParams['first_name']          = $params['first_name'];
+    $contactParams['last_name']           = $params['last_name'];
+    $contactParams['email']               = $params['email'];
+    $contactParams['job_title']           = $params['job_title'];
+    $contactParams['external_identifier'] = $params['external_identifier'];
+    $contactParams['gender_id']           = $params['gender_id'];
+    $contactParams['birth_date']          = $params['birth_date'];
 
     // update contact if contactID is found
     if (CRM_Utils_Array::value("id", $params)) {

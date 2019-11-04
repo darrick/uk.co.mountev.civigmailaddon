@@ -167,3 +167,17 @@ function civigmailaddon_civicrm_navigationMenu(&$menu) {
   ));
   _civigmailaddon_civix_navigationMenu($menu);
 }
+
+
+/**
+ * Implements hook_civicrm_alterAPIPermissions().
+ * This hook allows you to alter permission structure based on entity and action
+ */
+function civigmailaddon_civicrm_alterAPIPermissions($entity, $action, &$params, &$permissions) {
+  $permissions['civigmailaddon']['getcontact']            = array('access CiviCRM', 'access AJAX API', 'view all contacts');
+  $permissions['civigmailaddon']['createcontact']         = array('access CiviCRM', 'access AJAX API', 'add contacts');
+  $permissions['civigmailaddon']['createactivity']        = array('access CiviCRM', 'access AJAX API', 'access uploaded files');
+  $permissions['civigmailaddon']['createattachment']      = array('access CiviCRM', 'access AJAX API', 'access uploaded files');
+  $permissions['civigmailaddon']['getactivityresources']  = array('access CiviCRM', 'access AJAX API', 'access uploaded files');
+  $permissions['civigmailaddon']['createlog']             = array('access CiviCRM', 'access AJAX API');
+}

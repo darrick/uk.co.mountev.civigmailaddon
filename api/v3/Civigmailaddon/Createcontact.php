@@ -32,7 +32,7 @@ function civicrm_api3_civigmailaddon_Createcontact($params) {
     $contactParams['email']               = $params['email'];
     $contactParams['job_title']           = $params['job_title'];
     $contactParams['external_identifier'] = $params['external_identifier'];
-    $contactParams['gender']              = $params['gender'];
+    $contactParams['gender_id']           = $params['gender_id'];
     $contactParams['birth_date']          = $params['birth_date'];
 
     // update contact if contactID is found

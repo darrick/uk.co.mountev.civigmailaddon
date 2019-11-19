@@ -13,8 +13,6 @@ use CRM_Civigmailaddon_ExtensionUtil as E;
  * @throws API_Exception
  */
 function civicrm_api3_civigmailaddon_Testconnection($params) {
-  $isConnected = TRUE;
-
-  $result['is_connected'] = $isConnected;
+  $result = ['is_connected' => 1];
   return civicrm_api3_create_success($result, $params, 'Civigmailaddon', 'Testconnection');
 }

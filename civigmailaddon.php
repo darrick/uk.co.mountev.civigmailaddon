@@ -178,13 +178,15 @@ function civigmailaddon_civicrm_alterAPIPermissions($entity, $action, &$params, 
   $view   = ['access AJAX API', 'view all contacts'];
   $create = ['access AJAX API', 'add contacts'];
 
-  $permissions['civigmailaddon']['getcontact']            = $view;
-  $permissions['civigmailaddon']['createcontact']         = $create;
-  $permissions['civigmailaddon']['createactivity']        = $create;
-  $permissions['civigmailaddon']['createattachment']      = $create;
-  $permissions['civigmailaddon']['getactivityresources']  = $basic;
-  $permissions['civigmailaddon']['createlog']             = $create;
+  $permissions['civigmailaddon']['getactivityresources'] = $basic;
+  $permissions['civigmailaddon']['getcontactresources']  = $basic;
+  $permissions['civigmailaddon']['getcontact']           = $view;
+  $permissions['civigmailaddon']['getactivity']          = $view;
+  $permissions['civigmailaddon']['createcontact']        = $create;
+  $permissions['civigmailaddon']['createactivity']       = $create;
+  $permissions['civigmailaddon']['createattachment']     = $create;
+  $permissions['civigmailaddon']['createlog']            = $create;
 
   // test connection should pass only when all required permissions have been granted
-  $permissions['civigmailaddon']['testconnection']        = $basic + $view + $create;
+  $permissions['civigmailaddon']['testconnection']       = $basic + $view + $create;
 }

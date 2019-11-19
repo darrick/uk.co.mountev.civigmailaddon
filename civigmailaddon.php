@@ -174,10 +174,17 @@ function civigmailaddon_civicrm_navigationMenu(&$menu) {
  * This hook allows you to alter permission structure based on entity and action
  */
 function civigmailaddon_civicrm_alterAPIPermissions($entity, $action, &$params, &$permissions) {
-  $permissions['civigmailaddon']['getcontact']            = array('access CiviCRM', 'access AJAX API', 'view all contacts');
-  $permissions['civigmailaddon']['createcontact']         = array('access CiviCRM', 'access AJAX API', 'add contacts');
-  $permissions['civigmailaddon']['createactivity']        = array('access CiviCRM', 'access AJAX API', 'access uploaded files');
-  $permissions['civigmailaddon']['createattachment']      = array('access CiviCRM', 'access AJAX API', 'access uploaded files');
-  $permissions['civigmailaddon']['getactivityresources']  = array('access CiviCRM', 'access AJAX API', 'access uploaded files');
-  $permissions['civigmailaddon']['createlog']             = array('access CiviCRM', 'access AJAX API');
+  $basic  = ['access AJAX API'];
+  $view   = ['access AJAX API', 'view all contacts'];
+  $create = ['access AJAX API', 'add contacts'];
+
+  $permissions['civigmailaddon']['getcontact']            = $view;
+  $permissions['civigmailaddon']['createcontact']         = $create;
+  $permissions['civigmailaddon']['createactivity']        = $create;
+  $permissions['civigmailaddon']['createattachment']      = $create;
+  $permissions['civigmailaddon']['getactivityresources']  = $basic;
+  $permissions['civigmailaddon']['createlog']             = $create;
+
+  // test connection should pass only when all required permissions have been granted
+  $permissions['civigmailaddon']['testconnection']        = $basic + $view + $create;
 }
